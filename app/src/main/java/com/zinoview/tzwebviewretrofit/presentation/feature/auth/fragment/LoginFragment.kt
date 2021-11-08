@@ -10,6 +10,7 @@ import com.zinoview.tzwebviewretrofit.R
 import com.zinoview.tzwebviewretrofit.presentation.feature.auth.Auth
 import com.zinoview.tzwebviewretrofit.presentation.feature.auth.AuthCommunication
 import com.zinoview.tzwebviewretrofit.presentation.feature.auth.Field
+import com.zinoview.tzwebviewretrofit.presentation.feature.auth.FragmentState
 import com.zinoview.tzwebviewretrofit.presentation.feature.auth.core.BaseFragment
 import com.zinoview.tzwebviewretrofit.presentation.nav.ExitActivity
 

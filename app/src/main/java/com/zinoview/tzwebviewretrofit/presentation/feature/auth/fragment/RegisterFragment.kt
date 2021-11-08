@@ -10,6 +10,7 @@ import com.zinoview.tzwebviewretrofit.R
 import com.zinoview.tzwebviewretrofit.presentation.feature.auth.Auth
 import com.zinoview.tzwebviewretrofit.presentation.feature.auth.AuthCommunication
 import com.zinoview.tzwebviewretrofit.presentation.feature.auth.Field
+import com.zinoview.tzwebviewretrofit.presentation.feature.auth.FragmentState
 import com.zinoview.tzwebviewretrofit.presentation.feature.auth.core.BaseFragment
 import com.zinoview.tzwebviewretrofit.presentation.nav.ExitActivity
 
@@ -22,7 +23,6 @@ class RegisterFragment : BaseFragment(R.layout.register_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val auth = Auth.Base(Field.Base(),AuthCommunication.Base())
-
 
         val loginField = view.findViewById<EditText>(R.id.login_field)
         val passwordField = view.findViewById<EditText>(R.id.password_field)
@@ -47,10 +47,10 @@ class RegisterFragment : BaseFragment(R.layout.register_fragment) {
         forgotPasswordAccountTextView.setOnClickListener {
             navigator.navigateTo(RestoreAccountFragment())
         }
+
     }
 
     override fun navigateToBack()
         = (requireActivity() as ExitActivity).exit()
-
 
 }

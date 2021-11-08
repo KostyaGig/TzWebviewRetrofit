@@ -2,7 +2,7 @@ package com.zinoview.tzwebviewretrofit.presentation.feature.auth
 
 import android.content.Context
 import android.net.ConnectivityManager
-import com.zinoview.tzwebviewretrofit.presentation.feature.dialog.NetworkConnectionDialog
+import com.zinoview.tzwebviewretrofit.presentation.feature.auth.dialog.NetworkConnectionDialog
 
 
 interface NetworkConnection {

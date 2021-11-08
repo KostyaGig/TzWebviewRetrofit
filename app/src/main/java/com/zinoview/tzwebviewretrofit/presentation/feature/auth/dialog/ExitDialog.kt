@@ -1,4 +1,4 @@
-package com.zinoview.tzwebviewretrofit.presentation.feature.dialog
+package com.zinoview.tzwebviewretrofit.presentation.feature.auth.dialog
 
 import android.app.AlertDialog
 import android.app.Dialog

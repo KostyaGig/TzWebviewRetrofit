@@ -1,6 +1,10 @@
 package com.zinoview.tzwebviewretrofit.core
 
 import android.app.Application
+import com.onesignal.OneSignal
+import com.yandex.metrica.YandexMetrica
+import com.yandex.metrica.YandexMetricaConfig
+import com.zinoview.tzwebviewretrofit.R
 import com.zinoview.tzwebviewretrofit.data.DataResponseMapper
 import com.zinoview.tzwebviewretrofit.data.Repository
 import com.zinoview.tzwebviewretrofit.data.cloud.ApiService
@@ -27,6 +31,19 @@ class ResponseApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        val resourceProvider = ResourceProvider.Base(this)
+
+        //init yandex metric
+        val config = YandexMetricaConfig.newConfigBuilder(resourceProvider.string(R.string.yandex_metrics_api_key)).build()
+        YandexMetrica.activate(this,config)
+        YandexMetrica.enableActivityAutoTracking(this)
+
+        //init one signal
+        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
+
+        OneSignal.initWithContext(this);
+        OneSignal.setAppId(resourceProvider.string(R.string.one_signal_api_key));
 
         val client =
             OkHttpClient.Builder()

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TzWebviewRetrofit</string>
+    <string name="app_name">TzWebviewRetrofitApp</string>
     <string name="downloading_file_text">Downloading file…</string>
     <string name="give_permission_text">Please give permission for download files</string>
     <string name="enter_your_login_text">Enter your login</string>
@@ -10,4 +10,6 @@
     <string name="register_text">Register</string>
     <string name="restore_text">Restore</string>
     <string name="login_text">Login</string>
+    <string name="yandex_metrics_api_key">84b1d95c-2703-4f07-a4db-2223902da710</string>
+    <string name="one_signal_api_key">399e4775-3b2c-44f5-965b-bc23963a9451</string>
 </resources>

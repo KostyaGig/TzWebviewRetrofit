@@ -10,6 +10,7 @@ import com.zinoview.tzwebviewretrofit.R
 import com.zinoview.tzwebviewretrofit.presentation.feature.auth.Auth
 import com.zinoview.tzwebviewretrofit.presentation.feature.auth.AuthCommunication
 import com.zinoview.tzwebviewretrofit.presentation.feature.auth.Field
+import com.zinoview.tzwebviewretrofit.presentation.feature.auth.FragmentState
 import com.zinoview.tzwebviewretrofit.presentation.feature.auth.core.BaseFragment
 
 class RestoreAccountFragment : BaseFragment(R.layout.restore_account_fragment) {
@@ -38,5 +39,7 @@ class RestoreAccountFragment : BaseFragment(R.layout.restore_account_fragment) {
 
     override fun navigateToBack()
         = navigator.navigateTo(LoginFragment())
+
+
 
 }
