@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.feature.auth.AuthActivity"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/login_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_your_login_text"/>
+
+    <EditText
+        android:id="@+id/password_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_your_password_text"
+        android:layout_marginTop="@dimen/margin_10_dp"/>
+
+    <Button
+        android:id="@+id/auth_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/register_text"/>
+
+    <TextView
+        android:id="@+id/exist_account_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/already_exist_text"
+        android:layout_marginTop="@dimen/margin_10_dp"
+        android:layout_marginEnd="@dimen/margin_10_dp"
+        android:layout_gravity="end"/>
+
+    <TextView
+        android:id="@+id/forgot_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/forgot_password_text"
+        android:layout_marginTop="@dimen/margin_10_dp"
+        android:layout_marginEnd="@dimen/margin_10_dp"
+        android:layout_gravity="end"/>
+
+    <ProgressBar
+        android:id="@+id/auth_pb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_10_dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/auth_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_10_dp"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:visibility="gone"/>
+
+
+
+</LinearLayout>

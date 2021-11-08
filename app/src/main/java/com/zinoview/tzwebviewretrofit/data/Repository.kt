@@ -1,12 +1,14 @@
 package com.zinoview.tzwebviewretrofit.data
 
 import com.zinoview.tzwebviewretrofit.data.cloud.CloudDataSource
+import com.zinoview.tzwebviewretrofit.data.cloud.CloudResponse
 import com.zinoview.tzwebviewretrofit.data.prefs.ResponseSharedPreferences
-import com.zinoview.tzwebviewretrofit.log
 
 interface Repository {
 
     suspend fun data() : DataResponse
+
+    suspend fun auth(cloudResponse: CloudResponse) : DataResponse
 
     suspend fun saveUrl(url: String)
 
@@ -19,12 +21,15 @@ interface Repository {
         override suspend fun data(): DataResponse {
             return try {
                 val cloudResponse = cloudDataSource.data()
-                return if (responseSharedPreferences.isNotEmpty()) {
-                    val url = responseSharedPreferences.read()
-                    log("(Repository)shared preferences not empty , url $url")
-                    cloudResponse.map(url)
+                if (cloudResponse.urlIsEmpty()) {
+                    return if (responseSharedPreferences.isNotEmpty()) {
+                        val url = responseSharedPreferences.read()
+                        cloudResponse.map(url)
+                    } else {
+                        cloudResponse.map(dataResponseMapper)
+                    }
                 } else {
-                    cloudResponse.map(dataResponseMapper)
+                    auth(cloudResponse)
                 }
             } catch (e: Exception) {
                 DataResponse.Base("(Repository)Happened error at fetching data from network: ${e.message}","","")
@@ -33,5 +38,9 @@ interface Repository {
 
         override suspend fun saveUrl(url: String)
             = responseSharedPreferences.save(url)
+
+        override suspend fun auth(cloudResponse: CloudResponse): DataResponse {
+            return cloudResponse.map(dataResponseMapper)
+        }
     }
 }

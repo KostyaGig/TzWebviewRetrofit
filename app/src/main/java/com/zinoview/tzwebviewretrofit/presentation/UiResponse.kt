@@ -2,14 +2,15 @@ package com.zinoview.tzwebviewretrofit.presentation
 
 import android.webkit.WebView
 import com.zinoview.tzwebviewretrofit.core.Abstract
+import com.zinoview.tzwebviewretrofit.presentation.feature.auth.AuthActivity
+import com.zinoview.tzwebviewretrofit.presentation.nav.Navigator
 
 interface UiResponse : Abstract.Response {
 
-
     fun loadPage(webView: WebView)
 
-    //todo remove later
-    fun url() : String
+    fun makeAction(webView: WebView,navigator: Navigator)
+
     class Base(
         private val firstParam: String,
         private val secondParam: String,
@@ -23,7 +24,13 @@ interface UiResponse : Abstract.Response {
             webView.loadUrl(siteUrl)
         }
 
-        override fun url() = siteUrl
+        override fun makeAction(webView: WebView,navigator: Navigator) {
+            if (siteUrl.isEmpty()) {
+                navigator.navigateTo(AuthActivity())
+            } else {
+                webView.loadUrl(siteUrl)
+            }
+        }
 
     }
 }

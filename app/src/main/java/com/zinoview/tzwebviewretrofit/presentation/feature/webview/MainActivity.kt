@@ -1,4 +1,4 @@
-package com.zinoview.tzwebviewretrofit
+package com.zinoview.tzwebviewretrofit.presentation.feature.webview
 
 import android.Manifest
 import android.app.DownloadManager
@@ -14,8 +14,10 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import com.zinoview.tzwebviewretrofit.R
 import com.zinoview.tzwebviewretrofit.core.ResourceProvider
 import com.zinoview.tzwebviewretrofit.core.ResponseApp
+import com.zinoview.tzwebviewretrofit.presentation.nav.Navigator
 
 
 //for test
@@ -49,10 +51,15 @@ class MainActivity : AppCompatActivity() {
 
         val resourceProvider = ResourceProvider.Base(responseApp)
 
+        val navigator = Navigator.Base(this)
+
         webView = findViewById(R.id.webView)
         with(webView.settings) {
             javaScriptEnabled = true
             userAgentString = USER_AGENT
+            loadWithOverviewMode = true
+            useWideViewPort = true
+            builtInZoomControls = true
         }
 
         requestAccessWriteExternalStoragePermission = registerForActivityResult(
@@ -60,6 +67,7 @@ class MainActivity : AppCompatActivity() {
             permissionGranted = isGranted
         }
 
+        webView.setInitialScale(1)
         webView.webViewClient = object : WebViewClient() {
 
             @RequiresApi(Build.VERSION_CODES.M)
@@ -94,9 +102,8 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             viewModel.data()
-
             viewModel.observe(this) { uiResponse ->
-                uiResponse.loadPage(webView)
+                uiResponse.makeAction(webView,navigator)
             }
         } else {
             webView.restoreState(savedInstanceState)
@@ -104,6 +111,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun downloadFile(url: String) {
+        //todo move to class
         val downloadManagerRequest = DownloadManager.Request(Uri.parse(url))
         with(downloadManagerRequest) {
             allowScanningByMediaScanner()
