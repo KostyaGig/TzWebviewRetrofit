@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TzWebviewRetrofit</string>
+    <string name="downloading_file_text">Downloading file…</string>
+    <string name="give_permission_text">Please give permission for download files</string>
 </resources>
