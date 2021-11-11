@@ -3,6 +3,7 @@ package com.zinoview.tzwebviewretrofit.presentation.feature.auth
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.zinoview.tzwebviewretrofit.presentation.Observe
+import com.zinoview.tzwebviewretrofit.presentation.feature.webview.log
 import kotlinx.coroutines.*
 
 interface Auth : Observe<AuthState> {
@@ -13,10 +14,16 @@ interface Auth : Observe<AuthState> {
 
     fun restore(login: String)
 
+    fun clean()
+
     class Base(
         private val field: Field,
         private val authCommunication: AuthCommunication
     ) : Auth {
+
+        init {
+            log("Auth instance ${hashCode()}")
+        }
 
         override fun register(login: String, password: String) {
             authCommunication.postValue(AuthState.Progress())
@@ -34,6 +41,7 @@ interface Auth : Observe<AuthState> {
         override fun login(login: String, password: String) {
             authCommunication.postValue(AuthState.Progress())
             CoroutineScope(Dispatchers.IO).launch {
+                delay(DELAY.toLong())
                 if (firstStepIsCompleted(login, password)) {
                     withContext(Dispatchers.Main) {
                         authCommunication.postValue(AuthState.Success(SUCCESS_LOGIN))
@@ -78,6 +86,10 @@ interface Auth : Observe<AuthState> {
                 true
             }
 
+        }
+
+        override fun clean() {
+            authCommunication.clean()
         }
 
         override fun observe(owner: LifecycleOwner, observer: Observer<AuthState>) {

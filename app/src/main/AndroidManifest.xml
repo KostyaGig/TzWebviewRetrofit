@@ -17,7 +17,7 @@
         android:theme="@style/Theme.TzWebviewRetrofit">
         <activity
             android:name=".presentation.feature.auth.AuthActivity"
-            android:exported="true" />
+            android:exported="true"/>
         <activity
             android:name=".presentation.feature.webview.MainActivity"
             android:exported="true">

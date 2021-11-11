@@ -25,8 +25,9 @@ interface ResponseSharedPreferences {
             }
         }
 
-        override fun read()
+        override fun read() : String
             = sharedPreferencesReader.read(sharedPreferences, LAST_VISITED_URL_KEY)
+
 
         override fun isNotEmpty(): Boolean
             = sharedPreferencesReader.read(sharedPreferences, LAST_VISITED_URL_KEY) != EMPTY_URL

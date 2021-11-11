@@ -22,7 +22,6 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val auth = Auth.Base(Field.Base(), AuthCommunication.Base())
 
         val loginField = view.findViewById<EditText>(R.id.login_field)
         val passwordField = view.findViewById<EditText>(R.id.password_field)
@@ -34,13 +33,12 @@ class LoginFragment : BaseFragment(R.layout.login_fragment) {
         val forgotPasswordAccountTextView = view.findViewById<TextView>(R.id.forgot_tv)
 
         authBtn.setOnClickListener {
-            auth.login(loginField.text.trim().toString(),passwordField.text.trim().toString())
+            authViewModel.login(loginField.text.trim().toString(),passwordField.text.trim().toString())
         }
 
-        auth.observe(this) { authState ->
+        authViewModel.observe(this) { authState ->
             authState.map(authProgressBar,authResultTextView)
         }
-
 
         notExistAccountYetTextView.setOnClickListener {
             navigator.navigateTo(RegisterFragment())

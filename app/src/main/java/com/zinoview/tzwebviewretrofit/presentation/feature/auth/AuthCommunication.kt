@@ -9,6 +9,8 @@ interface AuthCommunication : Observe<AuthState> {
 
     fun postValue(value: AuthState)
 
+    fun clean()
+
     class Base : AuthCommunication {
 
         private val authLiveData = MutableLiveData<AuthState>()
@@ -19,6 +21,10 @@ interface AuthCommunication : Observe<AuthState> {
 
         override fun postValue(value: AuthState) {
             authLiveData.value = value
+        }
+
+        override fun clean() {
+            authLiveData.value = AuthState.Empty
         }
 
     }

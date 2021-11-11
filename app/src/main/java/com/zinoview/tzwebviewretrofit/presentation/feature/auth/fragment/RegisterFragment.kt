@@ -22,7 +22,6 @@ class RegisterFragment : BaseFragment(R.layout.register_fragment) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val auth = Auth.Base(Field.Base(),AuthCommunication.Base())
 
         val loginField = view.findViewById<EditText>(R.id.login_field)
         val passwordField = view.findViewById<EditText>(R.id.password_field)
@@ -33,10 +32,10 @@ class RegisterFragment : BaseFragment(R.layout.register_fragment) {
         val forgotPasswordAccountTextView = view.findViewById<TextView>(R.id.forgot_tv)
 
         authBtn.setOnClickListener {
-            auth.register(loginField.text.trim().toString(),passwordField.text.trim().toString())
+            authViewModel.register(loginField.text.trim().toString(),passwordField.text.trim().toString())
         }
 
-        auth.observe(this) { authState ->
+        authViewModel.observe(this) { authState ->
             authState.map(authProgressBar,authResultTextView)
         }
 

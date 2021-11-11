@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import com.zinoview.tzwebviewretrofit.core.ResourceProvider
 import com.zinoview.tzwebviewretrofit.presentation.feature.auth.AuthActivity
 import com.zinoview.tzwebviewretrofit.presentation.feature.webview.MainActivity
+import com.zinoview.tzwebviewretrofit.presentation.feature.webview.log
 
 /**
  *  MOCK_LOGIN = "mock_login"
@@ -30,7 +31,15 @@ abstract class BaseFragment(@LayoutRes id: Int) : Fragment(id) {
         toolbar?.title = resourceProvider.string(id)
     }
 
-
+    protected val authViewModel by lazy {
+        (requireActivity() as AuthActivity).authViewModel
+    }
 
     abstract fun navigateToBack()
+
+    override fun onDestroyView() {
+        log("Base fragment ondestroyView")
+        authViewModel.clean()
+        super.onDestroyView()
+    }
 }

@@ -16,6 +16,10 @@ import com.zinoview.tzwebviewretrofit.domain.Interactor
 import com.zinoview.tzwebviewretrofit.presentation.MainViewModel
 import com.zinoview.tzwebviewretrofit.presentation.ResponseCommunication
 import com.zinoview.tzwebviewretrofit.presentation.UiResponseMapper
+import com.zinoview.tzwebviewretrofit.presentation.feature.auth.Auth
+import com.zinoview.tzwebviewretrofit.presentation.feature.auth.AuthCommunication
+import com.zinoview.tzwebviewretrofit.presentation.feature.auth.AuthViewModel
+import com.zinoview.tzwebviewretrofit.presentation.feature.auth.Field
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -28,6 +32,7 @@ class ResponseApp : Application() {
     }
 
     lateinit var mainViewModel: MainViewModel
+    lateinit var authViewModel: AuthViewModel
 
     override fun onCreate() {
         super.onCreate()
@@ -80,6 +85,13 @@ class ResponseApp : Application() {
             interactor,
             UiResponseMapper.Base(),
             ResponseCommunication.Base()
+        )
+
+        authViewModel = AuthViewModel.Base(
+            Auth.Base(
+                Field.Base(),
+                AuthCommunication.Base()
+            )
         )
     }
 }

@@ -3,10 +3,20 @@ package com.zinoview.tzwebviewretrofit.presentation.feature.auth
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
+import com.zinoview.tzwebviewretrofit.presentation.feature.webview.log
 
 interface AuthState {
 
-    fun map(progressBar: ProgressBar,textView: TextView)
+    fun map(progressBar: ProgressBar,textView: TextView) = Unit
+
+    object Empty : AuthState {
+
+        override fun map(progressBar: ProgressBar, textView: TextView) {
+            log("Auth empty state")
+            progressBar.visibility = View.GONE
+            textView.visibility = View.GONE
+        }
+    }
 
     class Progress : AuthState {
 

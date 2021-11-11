@@ -21,7 +21,6 @@ class RestoreAccountFragment : BaseFragment(R.layout.restore_account_fragment) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val auth = Auth.Base(Field.Base(), AuthCommunication.Base())
 
         val loginField = view.findViewById<EditText>(R.id.login_field)
         val authBtn = view.findViewById<Button>(R.id.auth_btn)
@@ -29,10 +28,10 @@ class RestoreAccountFragment : BaseFragment(R.layout.restore_account_fragment) {
         val authResultTextView = view.findViewById<TextView>(R.id.auth_tv)
 
         authBtn.setOnClickListener {
-            auth.restore(loginField.text.trim().toString())
+            authViewModel.restore(loginField.text.trim().toString())
         }
 
-        auth.observe(this) { authState ->
+        authViewModel.observe(this) { authState ->
             authState.map(authProgressBar,authResultTextView)
         }
     }

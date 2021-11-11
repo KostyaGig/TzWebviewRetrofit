@@ -3,6 +3,7 @@ package com.zinoview.tzwebviewretrofit.data
 import com.zinoview.tzwebviewretrofit.data.cloud.CloudDataSource
 import com.zinoview.tzwebviewretrofit.data.cloud.CloudResponse
 import com.zinoview.tzwebviewretrofit.data.prefs.ResponseSharedPreferences
+import com.zinoview.tzwebviewretrofit.presentation.feature.webview.log
 
 interface Repository {
 
@@ -22,14 +23,14 @@ interface Repository {
             return try {
                 val cloudResponse = cloudDataSource.data()
                 if (cloudResponse.urlIsEmpty()) {
+                    auth(cloudResponse)
+                } else {
                     return if (responseSharedPreferences.isNotEmpty()) {
                         val url = responseSharedPreferences.read()
                         cloudResponse.map(url)
                     } else {
                         cloudResponse.map(dataResponseMapper)
                     }
-                } else {
-                    auth(cloudResponse)
                 }
             } catch (e: Exception) {
                 DataResponse.Base("(Repository)Happened error at fetching data from network: ${e.message}","","")
