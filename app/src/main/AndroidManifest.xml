@@ -5,8 +5,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
     <application
         android:name=".core.ResponseApp"
         android:allowBackup="true"
@@ -17,13 +17,14 @@
         android:theme="@style/Theme.TzWebviewRetrofit">
         <activity
             android:name=".presentation.feature.auth.AuthActivity"
-            android:exported="true"/>
+            android:exported="true">
+
+        </activity>
         <activity
             android:name=".presentation.feature.webview.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

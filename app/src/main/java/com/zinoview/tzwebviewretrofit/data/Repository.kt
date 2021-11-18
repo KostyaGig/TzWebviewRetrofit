@@ -26,9 +26,11 @@ interface Repository {
                     auth(cloudResponse)
                 } else {
                     return if (responseSharedPreferences.isNotEmpty()) {
+                        log("Repo shared pref not empty")
                         val url = responseSharedPreferences.read()
                         cloudResponse.map(url)
                     } else {
+                        log("Repo shared pref empty")
                         cloudResponse.map(dataResponseMapper)
                     }
                 }

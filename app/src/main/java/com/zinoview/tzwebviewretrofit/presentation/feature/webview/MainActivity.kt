@@ -101,6 +101,7 @@ class MainActivity : AppCompatActivity() {
             }
 
         if (savedInstanceState == null) {
+            log("savedstate == null")
             viewModel.data()
             viewModel.observe(this) { uiResponse ->
                 uiResponse.makeAction(webView,navigator)

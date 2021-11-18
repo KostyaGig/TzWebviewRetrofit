@@ -29,8 +29,10 @@ interface ResponseSharedPreferences {
             = sharedPreferencesReader.read(sharedPreferences, LAST_VISITED_URL_KEY)
 
 
-        override fun isNotEmpty(): Boolean
-            = sharedPreferencesReader.read(sharedPreferences, LAST_VISITED_URL_KEY) != EMPTY_URL
+        override fun isNotEmpty(): Boolean {
+            val url = sharedPreferencesReader.read(sharedPreferences, LAST_VISITED_URL_KEY)
+            return url != EMPTY_URL && url.isNotEmpty()
+        }
 
         private companion object {
 

@@ -2,6 +2,7 @@ package com.zinoview.tzwebviewretrofit.presentation.feature.auth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import com.zinoview.tzwebviewretrofit.R
 import com.zinoview.tzwebviewretrofit.core.ResponseApp
@@ -30,7 +31,6 @@ class AuthActivity : AppCompatActivity(), ExitActivity {
         setSupportActionBar(toolbar)
 
 
-
         val networkConnectionDialog = NetworkConnectionDialog.Base(this)
         val networkConnection = NetworkConnection.Base(this)
         networkConnection.handle(networkConnectionDialog)
@@ -51,4 +51,5 @@ class AuthActivity : AppCompatActivity(), ExitActivity {
         val baseFragment = supportFragmentManager.fragments[0] as BaseFragment
         baseFragment.navigateToBack()
     }
+
 }
